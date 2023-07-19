@@ -1,20 +1,23 @@
 def solution(keymap, targets):
-    keytable = {}
+    answer = []
+
+    key_table = {}
+    
     for keys in keymap:
-        for i, key in enumerate(keys):
-            if key not in keytable:
-                keytable[key] = i + 1
+        for i, x in enumerate(keys):
+            if x not in key_table:
+                key_table[x] = i + 1
             else:
-                keytable[key] = min(keytable[key], i + 1)
-
-    result = []
+                key_table[x] = min(key_table[x], i + 1)
+    
     for target in targets:
-        clicked = 0
-        for key in target:
-            if key not in keytable:
-                clicked = -1
+        sum = 0
+        for x in target:
+            if x not in key_table:
+                sum = -1
                 break
-            clicked += keytable[key]
-        result.append(clicked)
+            else:
+                sum += key_table[x]
+        answer.append(sum)
 
-    return result
+    return answer
