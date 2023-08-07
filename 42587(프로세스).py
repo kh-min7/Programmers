@@ -1,26 +1,22 @@
 def solution(priorities, location):
     answer = 0
+    best_idx = priorities.index(max(priorities))
+    while True:
+        best = max(priorities)
 
-    best = 0
-    best_idx = 0
-    arr = {}
-    while len(priorities) > 0:
+        if priorities[best_idx] == best:
+            priorities[best_idx] = 0
+            answer += 1
 
-        for i in range(best_idx, len(priorities)):
-            if best < priorities[i]:
-                best = priorities[i]
-                best_idx = i
-        arr[best_idx] = (best)
+            if best_idx == location:
+                break
 
-        del priorities[best_idx]
+        best_idx += 1
 
-        if best_idx == len(priorities) - 1:
+        if best_idx >= len(priorities):
             best_idx = 0
-        print(arr)
 
-            
     return answer
-
 priorities = [2,1,3,2]
 location = 2
 
