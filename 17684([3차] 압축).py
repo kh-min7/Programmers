@@ -1,14 +1,23 @@
 def solution(msg):
     answer = []
-    dic = {}
-
-    for i in range(26):
-        dic[(chr(ord('A') + i))] = i + 1
-    
-    
-    print(len(dic))
-
-
-    return answer 
+    dic = {chr(i+64):i for i in range(1, 27)}
+ 
+    c = 27
+    while True:
+        i = 0
+        
+        if msg in dic:
+            answer.append(dic[msg])
+            return answer
+        else:
+            for j in range(1, len(msg)+1):
+                if msg[i:j] not in dic:        
+                    answer.append(dic[msg[i:j-1]])   
+ 
+                    dic[msg[i:j]] = c
+                    c += 1
+                    
+                    msg = msg[j-1:]
+                    break
 
 print(solution('KAKAO'))
